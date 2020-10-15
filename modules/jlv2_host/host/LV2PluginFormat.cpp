@@ -607,16 +607,16 @@ public:
            #if JUCE_MAC
             native.reset (new NSViewComponent());
            #elif JUCE_LINUX
-            
+            native.reset (new XEmbedComponent());
            #endif
 
             jassert (native);
             addAndMakeVisible (native.get());
 
-            setSize (ui->getClientWidth() > 0 ?  ui->getClientWidth() : 240,
-                     ui->getClientHeight() > 0 ? ui->getClientHeight() : 100);
+            setSize (ui->getClientWidth() > 0 ?  ui->getClientWidth() : 800,
+                     ui->getClientHeight() > 0 ? ui->getClientHeight() : 600);
             startTimerHz (60);
-            setResizable (true, false);
+            setResizable (true, true);
         }
 
        #if JUCE_LINUX && JLV2_GTKUI

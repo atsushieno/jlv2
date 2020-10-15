@@ -694,7 +694,6 @@ bool Module::hasEditor() const
 
         const LilvNode* uitype = nullptr;
 
-       #if JUCE_MAC || JUCE_WINDOWS
         // check if native UI
         uitype = nullptr;
         if (lilv_ui_is_supported (lui, suil_ui_supported, world.getNativeWidgetType(), &uitype))
@@ -707,8 +706,7 @@ bool Module::hasEditor() const
                 continue;
             }
         }
-
-       #elif JUCE_LINUX && JLV2_GTKUI
+        #if JUCE_LINUX && JLV2_GTKUI
         // Check for Gtk2
         uitype = nullptr;
         if (lilv_ui_is_supported (lui, suil_ui_supported, world.ui_GtkUI, &uitype))
@@ -721,7 +719,7 @@ bool Module::hasEditor() const
                 continue;
             }
         }
-       #endif
+        #endif
 
         // no UI this far, check show interface
         if (hasShow)
